@@ -1,0 +1,35 @@
+head
+    title Login Authentication
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+block content
+  .container
+    .main-body
+      nav.main-breadcrumb(aria-label='breadcrumb')
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Home
+          li.breadcrumb-item
+            a(href='/auth/login') User Login
+  .container
+    h2 Login Authentication
+    form(action='/auth/login',method='POST')
+      .form-group
+        label(for='username') Username:
+        input#username.form-control(type='text', placeholder='Enter username', name='username')
+      .form-group
+        label(for='pwd') Password:
+        input#pwd.form-control(type='password', placeholder='Enter password', name='password')
+      .form-group.form-check
+        label.form-check-label
+          input.form-check-input(type='checkbox', name='remember')
+          |  Remember me
+      div
+          button.btn.btn-primary(type='submit') Submit
+          a.btn.btn-primary.ml-5(href="/auth/register") Register
+    if error
+      h6= error

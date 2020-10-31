@@ -1,0 +1,57 @@
+extends ../headerfooter.pug
+block content
+  header.masthead(style="background-image: url('/img/contact-bg.jpg')")
+    .overlay
+    .container
+      .row
+        .col-lg-8.col-md-10.mx-auto
+          .page-heading
+            h1 Have happy a day 
+  .container
+    .row
+      .col-lg-8.col-md-10.mx-auto
+        p
+          | Posts here !
+        form#contactForm(action='/account/timeline',method='POST',enctype="multipart/form-data")
+
+          .control-group
+            .form-group.floating-label-form-group.controls
+              label(for="Title") Title Post
+              input#Title.form-control(type='text', placeholder='Title Enter', required='', data-validation-required-message='Please enter your title post.',name="title")
+              p.help-block.text-danger
+          .control-group
+            .form-group.floating-label-form-group.controls
+              label(for="Content") Content Post
+              input#Content.form-control(type='text', placeholder='Content Enter', required='', data-validation-required-message='Please enter your Content post.',name="content")
+              p.help-block.text-danger
+          .control-group
+            .form-group.floating-label-form-group.controls
+              label(for='IDimage') Select a file:
+              input#IDimage(type='file', name='image')
+              br
+              label Your post tags :
+            if tags
+              select(name="idtag")
+                each tag in tags
+                  option(value=tag.idtag)= `${tag.nametag}`
+            br
+            br
+            button.btn.btn-primary(type='submit') Submit post
+    hr
+    if posts
+      each post in posts
+        div
+          span=  post.createdAt + "by " +user.username
+          image(src=post.image,width="1000px")
+          br
+          h2=  post.title
+          br
+          span=  post.content
+          hr
+          br
+    else
+        span= "Bạn chưa có bài đăng nào !"
+
+
+
+

@@ -1,0 +1,61 @@
+link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', rel='stylesheet')
+link(href='../css/profile.css', rel='stylesheet')
+link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+
+if user
+  .container
+    .main-body
+      // Breadcrumb
+      nav.main-breadcrumb(aria-label='breadcrumb')
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='/') Home
+          li.breadcrumb-item
+            a(href='/account/profile') User profile
+      .row.gutters-sm
+        .col-md-4.mb-3
+          .card
+            .card-body
+              .d-flex.flex-column.align-items-center.text-center
+                form(action='/account/profile',method='POST',enctype="multipart/form-data")
+                  img(src=user.avt, alt='', width='300')
+                  .mt-3
+                    h4= user.username
+                    label(for='IDimage')
+                    input#IDimage(type='file',name='image')
+                    button.btn.btn-outline-primary.mt-2 Change Avatar
+        .col-md-8
+          .card.mb-3
+            .card-body
+              .row
+                .col-sm-3
+                  h6.mb-0 User name
+                .col-sm-9.text-secondary
+                  span= `${user.username}`
+              hr
+              .row
+                .col-sm-3
+                  h6.mb-0 Email
+                .col-sm-9.text-secondary
+                  span= `${user.email}`
+              hr
+              .row
+                .col-sm-3
+                  h6.mb-0 Phone
+                .col-sm-9.text-secondary
+                  span= `${user.phone}`
+              hr
+              .row
+                .col-sm-3
+                  h6.mb-0 Permistion
+                .col-sm-9.text-secondary
+                  if user.permistion==1
+                    span Member
+                  else
+                    span Admin
+else
+    span Bạn chưa đăng nhập
+    a(href="http://localhost:3000/auth/login") Login
