@@ -52,8 +52,8 @@ exports.update = async(req, res) => {
 	return user
 };
 
-exports.delete = (req, res) => {
-  
+exports.delete = async (id) => {
+  await User.destroy({where:{iduser:id}}).then(()=>{return true}).catch((err)=>{return false})
 };
 
 exports.deleteAll = (req, res) => {

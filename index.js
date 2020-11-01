@@ -30,10 +30,18 @@ app.get('/',async(req,res)=>{
 	}else
 		return res.render('index',{tags:req.session.tags})
 })
-
+app.get('/users/del/:id',(req,res)=>{
+	const id = parseInt(req.params.id)
+	const SS = User.delete(id)
+	if(SS==true){
+		console.log("Delete success !")
+	}else{
+		console.log("Delete success !")
+	}
+	return res.redirect('/users')
+})
 app.get('/users',async(req,res) => {
 	var users = await User.findAll();
-	// console.log(typeof users)
 	return res.render('layout/user',
 		{
 			users : users
@@ -92,16 +100,19 @@ app.post('/auth/register',(req,res)=>{
 		return res.render('layout/register')
 	}
 })
-
+// app.get('/account/profile/:id',(req,res)=>{
+	
+// 	const user = await User.findOne(req,res)
+// 	return res.render('layout/profile',{user:user})
+// })
 app.get('/account/profile',(req,res)=>{
 	console.log("AVT : "+req.session.user.avt)
 	return res.render('layout/profile',{user:req.session.user})
 })
 app.post('/account/profile',upload.single('image'),async(req,res)=>{
-	console.log("iduser:"+req.session.user.iduser)
+	// console.log("iduser:"+req.session.user.iduser)
 	let data = req.file.path.split('\\').slice(1).join('/')
 	req.body.image = "../"+data
-	// console.log("before:"+req.session.user.avt)
 	User.update(req,res)
 	.then(()=>{
 		let user = req.session.user
