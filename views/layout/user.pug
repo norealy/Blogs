@@ -40,7 +40,7 @@ link(href='../css/user.css', rel='stylesheet')
                   tr
                     td
                       img(src=user.avt, alt='')
-                      a.user-link(href=`user/${user.iduser}`)= user.username
+                      a.user-link(href=`users/profile/${user.iduser}`)= user.username
                       if user.permistion==1
                         span.user-subhead Member
                       else if  user.permistion==0
@@ -57,7 +57,7 @@ link(href='../css/user.css', rel='stylesheet')
                         span.fa-stack
                           i.fa.fa-square.fa-stack-2x
                           i.fa.fa-pencil.fa-stack-1x.fa-inverse
-                      a.table-link.danger(href='#')
+                      a.table-link.danger(href=`/users/delete/${user.username}`)
                         span.fa-stack
                           i.fa.fa-square.fa-stack-2x
                           i.fa.fa-trash-o.fa-stack-1x.fa-inverse

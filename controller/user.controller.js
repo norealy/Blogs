@@ -52,8 +52,14 @@ exports.update = async(req, res) => {
 	return user
 };
 
-exports.delete = (req, res) => {
-  
+exports.delete = async(username) => {
+	const rl = await User.destroy({ where: { username:username } }).then((user)=>{
+		console.log('Delete success username : '+user.username);
+	})
+	.catch((err)=>{
+		console.log('Delete Fail'+err);
+	})
+	return rl
 };
 
 exports.deleteAll = (req, res) => {
