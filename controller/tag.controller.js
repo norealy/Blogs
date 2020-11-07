@@ -13,7 +13,7 @@ exports.create = (req, res) => {
       })
       .catch(err => {
           console.log(err)
-          return "Fail !"
+          return "Failed !"
       });
   };
 
